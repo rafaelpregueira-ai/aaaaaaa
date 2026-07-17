@@ -24,7 +24,7 @@ function Menu() {
       <div className="w-full max-w-[430px] min-h-screen bg-white flex flex-col relative pb-24">
         {/* Top bar */}
         <div className="flex items-center justify-between px-5 pt-5 pb-4">
-          <<img src="https://www.gov.br/governodigital/pt-br/identidade-visual-govbr/imagens/govbr-colorido-bg-negativo-azul-png.png" alt="gov.br" className="h-8 w-auto" />
+          <img src="https://www.gov.br/governodigital/pt-br/identidade-visual-govbr/imagens/govbr-colorido-bg-negativo-azul-png.png" alt="gov.br" className="h-8 w-auto" />
           <img
             src={avatar.url}
             alt="Perfil"
