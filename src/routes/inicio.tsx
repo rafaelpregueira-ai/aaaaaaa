@@ -1,261 +1,165 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  Bell,
-  Search,
-  Eye,
-  ShieldCheck,
-  Users,
-  Mail,
-  Wallet as WalletIcon,
-  FileSignature,
-  Calendar,
-  SearchCheck,
-  FileDown,
-  QrCode as QrCodeIcon,
-  UserSquare2,
-  ClipboardEdit,
-  UserCog,
-  Lock,
-  ChevronRight,
   Home,
   ClipboardList,
   Wallet,
-  Menu,
+  Menu as MenuIcon,
   QrCode,
+  Bell,
+  Search,
+  ChevronRight,
+  ShieldCheck,
+  Users,
+  Mail,
+  FolderOpen,
+  PenTool,
+  Calendar,
+  FileSearch,
+  Download,
+  Fingerprint,
+  UserCheck
 } from "lucide-react";
-import govbrLogo from "@/assets/govbr-logo.webp.asset.json";
-import heroUsers from "@/assets/hero-users.jpg";
-import { useUserProfile } from "@/lib/user-profile";
 
 export const Route = createFileRoute("/inicio")({
   head: () => ({
     meta: [
-      { title: "Início — gov.br" },
-      { name: "description", content: "Página inicial gov.br" },
+      { title: "Início – gov.br" },
+      { name: "description", content: "Página inicial do gov.br" },
     ],
   }),
   component: Inicio,
 });
 
 function Inicio() {
-  const { fotoUrl, primeiroNome } = useUserProfile();
-  return (
-    <div className="min-h-screen bg-white flex justify-center">
-      <div className="w-full max-w-[430px] min-h-screen bg-white flex flex-col relative pb-24">
+  const servicos = [
+    { nome: "Gerar código de acesso", icone: <ShieldCheck size={20} className="text-[#1351B4]" /> },
+    { nome: "Procuração eletrônica", icone: <Users size={20} className="text-[#1351B4]" />, novo: true },
+    { nome: "Caixa Postal", icone: <Mail size={20} className="text-[#1351B4]" /> },
+    { nome: "Carteira de documentos", icone: <FolderOpen size={20} className="text-[#1351B4]" /> },
+    { nome: "Assinar documentos digitalmente", icone: <PenTool size={20} className="text-[#1351B4]" /> },
+    { nome: "Agenda gov.br", icone: <Calendar size={20} className="text-[#1351B4]" /> },
+    { nome: "Consultar serviços solicitados", icone: <FileSearch size={20} className="text-[#1351B4]" /> },
+    { nome: "Baixar certidões", icone: <Download size={20} className="text-[#1351B4]" /> },
+    { nome: "Login sem senha (QR code)", icone: <Fingerprint size={20} className="text-[#1351B4]" /> },
+    { nome: "Prova de vida", icone: <UserCheck size={20} className="text-[#1351B4]" /> },
+  ];
 
-        {/* Top bar */}
-        <div className="flex items-center justify-between px-5 pt-5 pb-4">
-          <img src={govbrLogo.url} alt="gov.br" className="h-8 w-auto" />
+  return (
+    <div className="min-h-screen bg-gray-50 flex justify-center">
+      <div className="w-full max-w-[430px] min-h-screen bg-white flex flex-col relative pb-24 shadow-md">
+        
+        {/* TOP BAR */}
+        <div className="flex items-center justify-between px-5 pt-5 pb-4 bg-white">
+          {/* Logo oficial resolvida diretamente via CDN externa */}
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Gov.br_logo.svg/2560px-Gov.br_logo.svg.png" 
+            alt="gov.br" 
+            className="h-5 w-auto object-contain" 
+          />
           <div className="flex items-center gap-4">
-            <div className="relative">
-              <Bell style={{ color: "#5A5A5A" }} size={28} strokeWidth={2} />
-              <span
-                className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full text-[10px] font-bold text-white flex items-center justify-center"
-                style={{ backgroundColor: "#168821" }}
-              >
+            <div className="relative flex items-center">
+              <Bell size={24} className="text-gray-600" />
+              <span className="absolute -top-1 -right-1 bg-[#008000] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
                 1
               </span>
             </div>
-            <img
-              src={fotoUrl}
-              alt="Perfil"
-              className="w-11 h-11 rounded-full object-cover ring-1 ring-gray-200"
-            />
+            {/* Foto do Davi com link direto para não quebrar na build */}
+            <div className="w-9 h-9 rounded-full overflow-hidden border border-gray-200">
+              <img
+                src="https://raw.githubusercontent.com/davichavesr/fotos/main/davi-foto.jpg"
+                alt="Perfil"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback caso o link principal falhe temporariamente
+                  (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop";
+                }}
+              />
+            </div>
           </div>
         </div>
 
+        {/* BLUE HERO BANNER */}
+        <div className="bg-[#0f4090] text-white px-6 pt-6 pb-12 relative flex flex-col gap-4">
+          <div>
+            <h2 className="text-lg font-light opacity-90">Olá, <span className="font-bold">DAVI</span></h2>
+            <h1 className="text-xl font-bold mt-1 tracking-wide text-amber-400">SUA CONTA É NÍVEL OURO</h1>
+          </div>
+          
+          {/* Progress Gold Bars */}
+          <div className="grid grid-cols-3 gap-1.5 h-1.5 w-full">
+            <div className="bg-amber-400 rounded-full"></div>
+            <div className="bg-amber-400 rounded-full"></div>
+            <div className="bg-amber-400 rounded-full"></div>
+          </div>
 
-        {/* Hero banner */}
-        <div
-          className="relative overflow-hidden"
-          style={{ backgroundColor: "#0B2C63", height: 190 }}
-        >
-          <img
-            src={heroUsers}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover opacity-70"
-            style={{ objectPosition: "right center", mixBlendMode: "screen" }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(90deg, #0B2C63 0%, #0B2C63 40%, rgba(11,44,99,0.5) 100%)",
-            }}
-          />
-          <div className="relative h-full px-5 pt-5 flex flex-col">
-            <p className="text-white text-lg font-light">
-              Olá, <span className="font-bold">{primeiroNome}</span>
-            </p>
-            <p className="text-white text-lg font-light mt-1">
-              SUA CONTA É NÍVEL <span className="font-bold">OURO</span>
-            </p>
+          <button className="self-end bg-white text-[#1351B4] text-xs font-bold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-sm hover:bg-gray-100 transition-colors">
+            <span className="text-sm">👁</span> VER NÍVEL
+          </button>
+        </div>
 
-            {/* Progress bars */}
-            <div className="flex gap-1.5 mt-4">
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="flex-1 h-1.5 rounded-full"
-                  style={{ backgroundColor: "#FFCD07" }}
-                />
-              ))}
-            </div>
+        {/* SEARCH BAR (OVERLAPPING) */}
+        <div className="px-5 -mt-6 z-10">
+          <div className="relative flex items-center bg-white rounded-lg shadow-md border border-gray-100">
+            <input 
+              type="text" 
+              placeholder="Encontre serviços públicos no gov.br" 
+              className="w-full pl-4 pr-12 py-3.5 rounded-lg text-sm text-gray-700 outline-none placeholder-gray-400"
+            />
+            <Search className="absolute right-4 text-blue-600" size={20} />
+          </div>
+        </div>
 
-            <div className="flex justify-end mt-4">
-              <button
-                className="flex items-center gap-2 bg-white rounded-full px-4 py-2 text-sm font-semibold shadow"
-                style={{ color: "#1351B4" }}
+        {/* SERVIÇOS SECTION */}
+        <div className="px-5 mt-6 flex-1">
+          <h3 className="text-gray-500 text-sm font-medium mb-3">Serviços</h3>
+          
+          <div className="flex flex-col">
+            {servicos.map((servico, index) => (
+              <div 
+                key={index} 
+                className="flex items-center justify-between py-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors"
               >
-                <Eye size={16} strokeWidth={2.5} />
-                VER NÍVEL
-              </button>
-            </div>
+                <div className="flex items-center gap-3">
+                  {servico.icone}
+                  <span className="text-sm font-medium text-[#1351B4]">{servico.nome}</span>
+                  {servico.novo && (
+                    <span className="bg-green-700 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">
+                      NOVO
+                    </span>
+                  )}
+                </div>
+                <ChevronRight size={18} className="text-gray-400" />
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Search */}
-        <div className="px-4 -mt-5 relative z-10">
-          <div className="flex items-center bg-white rounded-md border border-gray-200 shadow-sm px-4 py-3">
-            <input
-              type="text"
-              placeholder="Encontre serviços públicos no gov.br"
-              className="flex-1 text-sm italic text-gray-500 bg-transparent outline-none placeholder:text-gray-500"
-            />
-            <Search style={{ color: "#1351B4" }} size={20} />
-          </div>
-        </div>
-
-        {/* Serviços */}
-        <div className="mt-5 bg-white">
-          <h2 className="px-5 py-3 text-gray-500 text-base">Serviços</h2>
-          <div className="border-t border-gray-100">
-            <ServiceItem icon={<ShieldCheck size={22} />} label="Gerar código de acesso" />
-            <ServiceItem
-              icon={<Users size={22} />}
-              label="Procuração eletrônica"
-              badge="NOVO"
-            />
-            <ServiceItem icon={<Mail size={22} />} label="Caixa Postal" />
-            <ServiceItem
-              icon={<WalletIcon size={22} />}
-              label="Carteira de documentos"
-              to="/carteira"
-            />
-            <ServiceItem
-              icon={<FileSignature size={22} />}
-              label="Assinar documentos digitalmente"
-            />
-            <ServiceItem icon={<Calendar size={22} />} label="Agenda gov.br" />
-            <ServiceItem icon={<SearchCheck size={22} />} label="Consultar serviços solicitados" />
-            <ServiceItem icon={<FileDown size={22} />} label="Baixar certidões" />
-            <ServiceItem icon={<QrCodeIcon size={22} />} label="Login sem senha (QR code)" />
-            <ServiceItem icon={<UserSquare2 size={22} />} label="Prova de vida" last />
-          </div>
-        </div>
-
-        {/* Minha conta */}
-        <div className="mt-4 bg-white">
-          <h2 className="px-5 py-3 text-gray-500 text-base">Minha conta</h2>
-          <div className="border-t border-gray-100">
-            <ServiceItem icon={<ClipboardEdit size={22} />} label="Dados pessoais" />
-            <ServiceItem icon={<UserCog size={22} />} label="Segurança da conta" />
-            <ServiceItem icon={<Lock size={22} />} label="Privacidade" last />
-          </div>
-        </div>
-
-        {/* Bottom nav (fixed) */}
+        {/* BOTTOM NAV (FIXED) */}
         <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white border-t border-gray-200 grid grid-cols-5 items-end pt-2 pb-3 z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
-          <NavItem icon={<Home size={22} />} label="Início" active />
-          <NavItemLink to="/dados" icon={<ClipboardList size={22} />} label="Dados" />
-          <div className="flex flex-col items-center -mt-8">
-            <div
-              className="w-14 h-14 rounded-full flex items-center justify-center shadow-md"
-              style={{ backgroundColor: "#168821" }}
-            >
-              <QrCode className="text-white" size={26} />
-            </div>
-            <span className="text-xs text-gray-500 mt-1">QR Code</span>
+          <div className="flex flex-col items-center gap-1 cursor-pointer" style={{ color: "#1351B4" }}>
+            <Home size={22} />
+            <span className="text-xs">Início</span>
           </div>
-          <NavItemLink to="/carteira" icon={<Wallet size={22} strokeWidth={2.2} />} label="Carteira" />
-          <NavItemLink to="/menu" icon={<Menu size={22} />} label="Menu" />
+          <Link to="/dados" className="flex flex-col items-center gap-1" style={{ color: "#8A8A8A" }}>
+            <ClipboardList size={22} />
+            <span className="text-xs">Dados</span>
+          </Link>
+          <div className="flex flex-col items-center justify-center relative -top-5">
+            <div className="w-14 h-14 bg-[#1351B4] rounded-full flex items-center justify-center text-white shadow-lg shadow-blue-200 border-4 border-white cursor-pointer">
+              <QrCode size={26} strokeWidth={2.5} />
+            </div>
+          </div>
+          <Link to="/carteira" className="flex flex-col items-center gap-1" style={{ color: "#8A8A8A" }}>
+            <Wallet size={22} strokeWidth={2.2} />
+            <span className="text-xs">Carteira</span>
+          </Link>
+          <Link to="/menu" className="flex flex-col items-center gap-1" style={{ color: "#8A8A8A" }}>
+            <MenuIcon size={22} />
+            <span className="text-xs">Menu</span>
+          </Link>
         </div>
 
       </div>
     </div>
-  );
-}
-
-function ServiceItem({
-  icon,
-  label,
-  badge,
-  to,
-  last,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  badge?: string;
-  to?: string;
-  last?: boolean;
-}) {
-  const content = (
-    <div
-      className={`flex items-center gap-4 px-5 py-4 ${last ? "" : "border-b border-gray-100"}`}
-    >
-      <span style={{ color: "#1351B4" }}>{icon}</span>
-      <span className="flex-1 font-bold text-[15px]" style={{ color: "#1351B4" }}>
-        {label}
-      </span>
-      {badge && (
-        <span
-          className="text-white text-[10px] font-bold px-2.5 py-1 rounded-full"
-          style={{ backgroundColor: "#168821" }}
-        >
-          {badge}
-        </span>
-      )}
-      <ChevronRight style={{ color: "#1351B4" }} size={20} />
-    </div>
-  );
-  if (to) return <Link to={to}>{content}</Link>;
-  return content;
-}
-
-function NavItem({
-  icon,
-  label,
-  active,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  active?: boolean;
-}) {
-  const color = active ? "#1351B4" : "#8A8A8A";
-  return (
-    <div className="flex flex-col items-center gap-1" style={{ color }}>
-      {icon}
-      <span className="text-xs">{label}</span>
-    </div>
-  );
-}
-
-function NavItemLink({
-  to,
-  icon,
-  label,
-  active,
-}: {
-  to: string;
-  icon: React.ReactNode;
-  label: string;
-  active?: boolean;
-}) {
-  const color = active ? "#1351B4" : "#8A8A8A";
-  return (
-    <Link to={to} className="flex flex-col items-center gap-1" style={{ color }}>
-      {icon}
-      <span className="text-xs">{label}</span>
-    </Link>
   );
 }
