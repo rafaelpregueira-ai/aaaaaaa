@@ -25,7 +25,12 @@ function Menu() {
       <div className="w-full max-w-[430px] min-h-screen bg-white flex flex-col relative pb-24">
         {/* Top bar */}
         <div className="flex items-center justify-between px-5 pt-5 pb-4">
-          <img src="/logo-gov.png" alt="gov.br" className="h-8 w-auto" />
+          {/* Logo oficial do gov.br puxada direto da internet */}
+          <img 
+            src="https://www.gov.br/++theme++padrao_govbr/img/govbr-logo-large.png" 
+            alt="gov.br" 
+            className="h-8 w-auto bg-[#1351B4] p-1 rounded" 
+          />
           <img
             src={avatar.url}
             alt="Perfil"
