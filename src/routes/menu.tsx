@@ -6,12 +6,13 @@ import {
   Menu as MenuIcon,
   QrCode,
 } from "lucide-react";
+
 import avatar from "@/assets/davi-foto.jpg.asset.json";
 
 export const Route = createFileRoute("/menu")({
   head: () => ({
     meta: [
-      { title: "Menu — gov.br" },
+      { title: "Menu – gov.br" },
       { name: "description", content: "Menu gov.br" },
     ],
   }),
@@ -24,7 +25,8 @@ function Menu() {
       <div className="w-full max-w-[430px] min-h-screen bg-white flex flex-col relative pb-24">
         {/* Top bar */}
         <div className="flex items-center justify-between px-5 pt-5 pb-4">
-          <img src="https://redesim.es.gov.br/Media/RedesimEs/Imagens/logo-gov-br.png" alt="gov.br" className="h-8 w-auto" />
+          <img src="/logo-gov.png" alt="gov.br" className="h-8 w-auto" />
+          <img
             src={avatar.url}
             alt="Perfil"
             className="w-11 h-11 rounded-full object-cover ring-1 ring-gray-200"
@@ -43,14 +45,10 @@ function Menu() {
             <ClipboardList size={22} />
             <span className="text-xs">Dados</span>
           </Link>
-          <div className="flex flex-col items-center -mt-8">
-            <div
-              className="w-14 h-14 rounded-full flex items-center justify-center shadow-md"
-              style={{ backgroundColor: "#168821" }}
-            >
-              <QrCode className="text-white" size={26} />
+          <div className="flex flex-col items-center justify-center relative -top-5">
+            <div className="w-14 h-14 bg-[#1351B4] rounded-full flex items-center justify-center text-white shadow-lg shadow-blue-200 border-4 border-white">
+              <QrCode size={26} strokeWidth={2.5} />
             </div>
-            <span className="text-xs text-gray-500 mt-1">QR Code</span>
           </div>
           <Link to="/carteira" className="flex flex-col items-center gap-1" style={{ color: "#8A8A8A" }}>
             <Wallet size={22} strokeWidth={2.2} />
